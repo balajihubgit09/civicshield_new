@@ -7,10 +7,10 @@ function formatDate(value) {
 
 export default function TransactionTable({ rows }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-white/70 bg-white/60 shadow-panel">
+    <div className="overflow-hidden rounded-lg border border-white/14 bg-white/6 shadow-panel">
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
-          <thead className="bg-white/80 text-slate-600">
+          <thead className="bg-slate-950/80 text-slate-300">
             <tr>
               <th className="px-4 py-3 font-medium">Transaction</th>
               <th className="px-4 py-3 font-medium">Timestamp</th>
@@ -22,13 +22,13 @@ export default function TransactionTable({ rows }) {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td className="px-4 py-6 text-slate-500" colSpan="5">
+                <td className="px-4 py-6 text-slate-400" colSpan="5">
                   No transactions yet.
                 </td>
               </tr>
             ) : (
               rows.map((row) => (
-                <tr key={row.TransactionID} className="border-t border-slate-200 text-slate-700">
+                <tr key={row.TransactionID} className="border-t border-white/8 text-slate-200">
                   <td className="px-4 py-3">{row.TransactionID}</td>
                   <td className="px-4 py-3">{formatDate(row.Timestamp)}</td>
                   <td className="px-4 py-3">{row.Scheme}</td>

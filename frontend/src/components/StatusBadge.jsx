@@ -1,8 +1,8 @@
 const styles = {
-  ACTIVE: "border-emerald-300 bg-emerald-50 text-emerald-700",
-  FROZEN: "border-red-300 bg-red-50 text-red-700",
-  PAUSED: "border-amber-300 bg-amber-50 text-amber-700",
-  BUDGET_EXHAUSTED: "border-red-300 bg-red-50 text-red-700"
+  ACTIVE: "border-emerald-300/30 bg-emerald-400/12 text-emerald-100",
+  FROZEN: "border-rose-300/30 bg-rose-400/12 text-rose-100",
+  PAUSED: "border-amber-300/30 bg-amber-400/12 text-amber-100",
+  BUDGET_EXHAUSTED: "border-rose-300/30 bg-rose-400/12 text-rose-100"
 };
 
 export default function StatusBadge({ status }) {
