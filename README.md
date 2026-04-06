@@ -55,13 +55,7 @@ civicshield/
 
 ## Important Dataset Behavior
 
-The application loads your provided dataset from [CivicShield_Dataset.xlsx](/c:/Users/BALAJI/evlove/civicshield/backend/data/CivicShield_Dataset.xlsx) at startup and does **not** modify the Excel file.
-
-Because you requested the workbook remain unchanged:
-- the Excel file is treated as read-only source data
-- newly approved claim history is persisted in [state.json](/c:/Users/BALAJI/evlove/civicshield/backend/data/state.json)
-- immutable approvals are persisted in [ledger.json](/c:/Users/BALAJI/evlove/civicshield/backend/data/ledger.json)
-- effective `Claim_Count` and `Last_Claim_Date` are computed from dataset + runtime history
+The application loads provided dataset from [CivicShield_Dataset.xlsx](/c:/Users/BALAJI/evlove/civicshield/backend/data/CivicShield_Dataset.xlsx)
 
 ## Quick Start
 
