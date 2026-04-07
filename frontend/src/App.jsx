@@ -17,13 +17,13 @@ const navLinks = [
 const themes = [
   {
     id: "aurora",
-    name: "Aurora Glass",
-    description: "Deep slate with cyan and emerald highlights."
+    name: "Night Glass",
+    description: "Dark green glass with luminous highlight panels."
   },
   {
     id: "light",
-    name: "Light Glass",
-    description: "Bright frosted surfaces with cool blue highlights."
+    name: "Soft Light",
+    description: "Bright frosted surfaces with the same green accent system."
   }
 ];
 
@@ -188,17 +188,20 @@ function AppLayout({ theme, setTheme, citizenSession, adminSession, onCitizenLog
   }, [location.pathname]);
 
   return (
-    <div className="app-shell min-h-screen" data-theme={theme}>
+    <div className="app-shell" data-theme={theme}>
       <div className="app-backdrop" />
       <div className="app-grid" />
+      <div className="site-shell">
+        <div className="page-brand-mark">CS</div>
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col px-4 pb-8 pt-4 sm:px-6 lg:px-8">
-        <header className="topbar">
+        <header className="topbar glass-card">
           <div className="topbar-brand">
-            <div className="brand-mark">CS</div>
-            <div>
-              <p className="brand-kicker">CivicShield Platform</p>
-              <h1 className="brand-title">Welfare operations command interface</h1>
+            <div className="brand-link">
+              <div className="brand-mark">CS</div>
+              <div>
+                <p className="brand-kicker">CivicShield Platform</p>
+                <h1 className="brand-title">Protected welfare operations workspace</h1>
+              </div>
             </div>
           </div>
 
@@ -216,7 +219,7 @@ function AppLayout({ theme, setTheme, citizenSession, adminSession, onCitizenLog
 
           <div className="topbar-actions">
             <div className="topbar-page">
-              <p className="topbar-page-label">Current page</p>
+              <p className="topbar-page-label">Current Page</p>
               <p className="topbar-page-title">{pageTitle}</p>
             </div>
             <GearButton open={settingsOpen} onClick={() => setSettingsOpen((current) => !current)} />
@@ -232,7 +235,7 @@ function AppLayout({ theme, setTheme, citizenSession, adminSession, onCitizenLog
           onAdminLogout={onAdminLogout}
         />
 
-        <main className="page-enter flex-1 pt-6">{children}</main>
+        <main className="page-enter">{children}</main>
       </div>
     </div>
   );

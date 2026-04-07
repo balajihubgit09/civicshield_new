@@ -29,12 +29,12 @@ export default function CitizenLoginPage({ session, onLogin }) {
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
-      <section className="glass-card rounded-lg border border-white/14 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">Citizen Login</p>
-        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Open your protected claim workspace</h2>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-          Start a citizen session to continue into a dedicated claim page with validation feedback, system status, and clear next steps.
+    <div className="split-grid">
+      <section className="glass-card section-panel">
+        <p className="eyebrow">Citizen Login</p>
+        <h2 className="section-title">Open your protected claim workspace</h2>
+        <p className="section-copy">
+          Start a citizen session and move directly into a dedicated claim page with validation feedback, status visibility, and clear next actions.
         </p>
 
         <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
@@ -70,33 +70,26 @@ export default function CitizenLoginPage({ session, onLogin }) {
           </label>
 
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <button
-              type="submit"
-              className="rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-            >
+            <button type="submit" className="button-primary">
               Continue to Claim Workspace
             </button>
-            <Link
-              to="/"
-              className="rounded-lg border border-white/12 bg-white/8 px-5 py-3 text-center text-sm font-medium text-slate-100 transition hover:bg-white/12"
-            >
+            <Link to="/" className="button-secondary">
               Return to Overview
             </Link>
           </div>
         </form>
       </section>
 
-      <section className="glass-card rounded-lg border border-white/12 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-emerald-200">Session Benefits</p>
-        <div className="mt-6 grid gap-4">
+      <section className="glass-card info-panel">
+        <p className="eyebrow">Session Benefits</p>
+        <h3 className="section-title">Direct entry with saved context.</h3>
+        <div className="benefit-list" style={{ marginTop: "1rem" }}>
           {[
             "Direct entry into a dedicated claim submission page.",
             "Saved citizen session across refresh for the current browser session.",
             "Fast route access from the left-side menu after sign-in."
           ].map((item) => (
-            <div key={item} className="rounded-lg border border-white/10 bg-white/6 p-4 text-sm leading-6 text-slate-300">
-              {item}
-            </div>
+            <div key={item} className="benefit-card muted-copy">{item}</div>
           ))}
         </div>
       </section>

@@ -36,12 +36,12 @@ export default function AdminLoginPage({ session, onLogin }) {
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1fr_1fr]">
-      <section className="glass-card rounded-lg border border-white/14 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">Admin Login</p>
-        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Authenticate into the command center</h2>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-          Verify credentials here, then move into a dedicated dashboard for system status, budget supervision, and tamper response.
+    <div className="split-grid">
+      <section className="glass-card section-panel">
+        <p className="eyebrow">Admin Login</p>
+        <h2 className="section-title">Authenticate into the command center</h2>
+        <p className="section-copy">
+          Verify credentials here, then move into a dedicated dashboard for system state, budget supervision, fraud pressure, and tamper response.
         </p>
 
         <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
@@ -70,40 +70,32 @@ export default function AdminLoginPage({ session, onLogin }) {
           </label>
 
           {error ? (
-            <div className="rounded-lg border border-rose-400/25 bg-rose-500/12 px-4 py-3 text-sm text-rose-100">
+            <div className="danger-panel rounded-lg px-4 py-3 text-sm text-rose-100">
               {error}
             </div>
           ) : null}
 
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-            <button
-              type="submit"
-              disabled={loading}
-              className="rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
-            >
+            <button type="submit" disabled={loading} className="button-primary">
               {loading ? "Authenticating..." : "Enter Admin Dashboard"}
             </button>
-            <Link
-              to="/"
-              className="rounded-lg border border-white/12 bg-white/8 px-5 py-3 text-center text-sm font-medium text-slate-100 transition hover:bg-white/12"
-            >
+            <Link to="/" className="button-secondary">
               Return to Overview
             </Link>
           </div>
         </form>
       </section>
 
-      <section className="glass-card rounded-lg border border-white/12 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-amber-200">Admin Scope</p>
-        <div className="mt-6 grid gap-4">
+      <section className="glass-card info-panel">
+        <p className="eyebrow">Admin Scope</p>
+        <h3 className="section-title">Live control with guarded actions.</h3>
+        <div className="benefit-list" style={{ marginTop: "1rem" }}>
           {[
             "Review ledger health, approval rates, and recent transactions.",
             "Pause or resume claim processing with direct system controls.",
             "Download a tamper report only when the system is frozen."
           ].map((item) => (
-            <div key={item} className="rounded-lg border border-white/10 bg-white/6 p-4 text-sm leading-6 text-slate-300">
-              {item}
-            </div>
+            <div key={item} className="benefit-card muted-copy">{item}</div>
           ))}
         </div>
       </section>

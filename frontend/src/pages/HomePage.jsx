@@ -28,75 +28,82 @@ export default function HomePage({ citizenSession, adminSession }) {
   }, []);
 
   return (
-    <div className="grid gap-5">
-      <section className="glass-card rounded-lg border border-white/14 p-6 sm:p-8">
-        <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
-          <div className="max-w-4xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">National Welfare Security Grid</p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Trusted claim processing with a sharper citizen journey and an operations-grade admin command center.
+    <div className="content-grid">
+      <section className="glass-card hero-panel">
+        <div className="hero-grid">
+          <div>
+            <p className="eyebrow">National Welfare Security Grid</p>
+            <h2 className="hero-title gradient-title">
+              Trusted claim processing with a glass-first citizen flow and a sharper admin control surface.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-              Every step now moves through dedicated pages, guided menu routes, and a high-contrast glass interface built to feel premium during demos and real use.
+            <p className="hero-copy">
+              Move between citizen intake, approval visibility, and live system oversight with the same polished interface language used across the reference frontend.
             </p>
+            <div className="hero-actions">
+              <Link to="/citizen/login" className="button-primary">
+                Open Citizen Login
+              </Link>
+              <Link to="/admin/login" className="button-secondary">
+                Open Admin Login
+              </Link>
+            </div>
           </div>
 
-          <div className="grid gap-3 sm:min-w-[300px]">
-            <div className="rounded-lg border border-cyan-300/18 bg-cyan-400/10 p-4">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-cyan-100/75">Platform Status</p>
-              <div className="mt-3 flex items-center justify-between gap-3">
-                <p className="text-lg font-semibold text-white">{system ? system.status : "Checking"}</p>
-                {system ? <StatusBadge status={system.status} /> : null}
-              </div>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-slate-400">Citizen Session</p>
-                <p className="mt-2 text-sm font-medium text-white">
-                  {citizenSession ? citizenSession.fullName : "Awaiting sign-in"}
-                </p>
-              </div>
-              <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-slate-400">Admin Session</p>
-                <p className="mt-2 text-sm font-medium text-white">
-                  {adminSession ? adminSession.username : "Locked"}
-                </p>
-              </div>
-            </div>
+          <div className="hero-stat-grid">
+            <article className="glass-card hero-stat-card">
+              <span>Platform Status</span>
+              <strong>{system ? system.status : "Checking"}</strong>
+              {system ? <StatusBadge status={system.status} /> : null}
+            </article>
+            <article className="glass-card hero-stat-card">
+              <span>Citizen Session</span>
+              <strong>{citizenSession ? citizenSession.fullName : "Awaiting sign-in"}</strong>
+            </article>
+            <article className="glass-card hero-stat-card">
+              <span>Admin Session</span>
+              <strong>{adminSession ? adminSession.username : "Protected"}</strong>
+            </article>
+            <article className="glass-card hero-stat-card">
+              <span>Routes Ready</span>
+              <strong>4</strong>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
-        <div className="grid gap-5 sm:grid-cols-2">
+      <section className="split-grid">
+        <div className="content-grid">
           {pathways.map((pathway) => (
-            <div key={pathway.title} className="glass-card rounded-lg border border-white/12 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.26em] text-emerald-200">{pathway.title}</p>
-              <h3 className="mt-4 text-2xl font-semibold text-white">{pathway.cta.replace("Enter ", "")}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{pathway.description}</p>
-              <Link
-                to={pathway.to}
-                className="mt-6 inline-flex rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-              >
-                {pathway.cta}
-              </Link>
-            </div>
+            <article key={pathway.title} className="glass-card section-panel">
+              <p className="eyebrow">{pathway.title}</p>
+              <h3 className="section-title">{pathway.cta.replace("Enter ", "")}</h3>
+              <p className="section-copy">{pathway.description}</p>
+              <div className="action-row">
+                <Link to={pathway.to} className="button-primary">
+                  {pathway.cta}
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
 
-        <div className="glass-card rounded-lg border border-white/12 p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.26em] text-amber-200">Command Path</p>
-          <div className="mt-5 grid gap-4">
+        <div className="glass-card info-panel">
+          <p className="eyebrow">Command Path</p>
+          <h3 className="section-title">Open what matters next.</h3>
+          <div className="benefit-list" style={{ marginTop: "1rem" }}>
             {[
               "Open the role-specific login page from the menu.",
               "Authenticate or start a citizen session.",
               "Land on a dedicated workspace with actions and follow-up routes ready."
             ].map((step, index) => (
-              <div key={step} className="flex gap-3 rounded-lg border border-white/10 bg-white/6 p-4">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-sm font-semibold text-white">
+              <div key={step} className="benefit-card" style={{ display: "flex", gap: "0.9rem" }}>
+                <div
+                  className="data-pill"
+                  style={{ minWidth: "2rem", justifyContent: "center", color: "var(--text-primary)" }}
+                >
                   {index + 1}
                 </div>
-                <p className="text-sm leading-6 text-slate-300">{step}</p>
+                <p className="muted-copy">{step}</p>
               </div>
             ))}
           </div>

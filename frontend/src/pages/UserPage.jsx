@@ -91,28 +91,24 @@ export default function UserPage({ session, onLogout }) {
   }
 
   return (
-    <div className="grid gap-5">
-      <section className="glass-card rounded-lg border border-white/14 p-6 sm:p-8">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+    <div className="content-grid">
+      <section className="glass-card hero-panel">
+        <div className="hero-grid">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">Citizen Workspace</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Submit a welfare disbursement request</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
+            <p className="eyebrow">Citizen Workspace</p>
+            <h2 className="section-title">Submit a welfare disbursement request</h2>
+            <p className="section-copy">
               Welcome back, {session?.fullName}. Claims route through eligibility, budget, fraud, and ledger validation before approval.
             </p>
           </div>
-          <div className="grid gap-3 sm:min-w-[300px]">
-            <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Citizen ID</p>
-              <p className="mt-2 text-sm font-semibold text-white">{session?.citizenId}</p>
+          <div className="hero-stat-grid">
+            <div className="glass-card hero-stat-card">
+              <span>Citizen ID</span>
+              <strong>{session?.citizenId}</strong>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="action-row" style={{ marginTop: 0 }}>
               {system ? <StatusBadge status={system.status} /> : null}
-              <button
-                type="button"
-                onClick={onLogout}
-                className="rounded-lg border border-white/12 bg-white/8 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/12"
-              >
+              <button type="button" onClick={onLogout} className="button-secondary">
                 End Session
               </button>
             </div>
@@ -120,12 +116,12 @@ export default function UserPage({ session, onLogout }) {
         </div>
       </section>
 
-      <div className="grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
-        <section className="glass-card rounded-lg border border-white/14 p-6">
+      <div className="split-grid">
+        <section className="glass-card section-panel">
           {freezeVisible ? (
-            <div className="rounded-lg border border-rose-400/25 bg-rose-500/12 p-4 text-rose-100 animate-pulseGlow">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-rose-100">System Frozen</p>
-              <p className="mt-2 text-sm leading-6">
+            <div className="danger-panel rounded-lg p-4 text-rose-100 animate-pulseGlow">
+              <p className="eyebrow" style={{ color: "var(--text-primary)" }}>System Frozen</p>
+              <p className="muted-copy" style={{ marginTop: "0.5rem", color: "var(--text-primary)" }}>
                 {system.freezeReason === "ADMIN_PAUSED"
                   ? "Administrative pause is active. Claim processing is intentionally blocked."
                   : `Claim processing is blocked due to ${system.freezeReason}.`}
@@ -134,8 +130,8 @@ export default function UserPage({ session, onLogout }) {
           ) : null}
 
           <div className="mb-6 mt-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-emerald-200">Claim Intake</p>
-            <h3 className="mt-3 text-2xl font-semibold text-white">Validate and send a new claim</h3>
+            <p className="eyebrow">Claim Intake</p>
+            <h3 className="section-title">Validate and send a new claim</h3>
           </div>
 
           <form className="grid gap-4" onSubmit={handleSubmit}>
@@ -169,46 +165,37 @@ export default function UserPage({ session, onLogout }) {
               />
             </label>
 
-            <div className="rounded-lg border border-white/10 bg-white/6 p-4 text-sm leading-6 text-slate-300">
+            <div className="notice-card muted-copy">
               {helperText}
             </div>
 
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-              <button
-                type="submit"
-                disabled={ctaDisabled}
-                className="rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
-              >
+              <button type="submit" disabled={ctaDisabled} className="button-primary">
                 {loading ? "Validating..." : "Submit Claim"}
               </button>
-              <Link
-                to="/citizen/login"
-                className="rounded-lg border border-white/12 bg-white/8 px-5 py-3 text-center text-sm font-medium text-slate-100 transition hover:bg-white/12"
-              >
+              <Link to="/citizen/login" className="button-secondary">
                 Back to Citizen Login
               </Link>
             </div>
           </form>
         </section>
 
-        <section className="glass-card rounded-lg border border-white/14 p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.26em] text-amber-200">Decision Panel</p>
-          <h3 className="mt-3 text-2xl font-semibold text-white">Validation outcome</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-300">
+        <section className="glass-card info-panel">
+          <p className="eyebrow">Decision Panel</p>
+          <h3 className="section-title">Validation outcome</h3>
+          <p className="section-copy">
             Review approvals, rejection reasons, fraud flags, and final ledger evidence on this page.
           </p>
 
           <div className="mt-6">
             {!result ? (
-              <div className="rounded-lg border border-white/10 bg-white/6 p-5 text-sm text-slate-400">
+              <div className="notice-card muted-copy">
                 Submit a request to see approval or rejection details here.
               </div>
             ) : (
               <div
-                className={`rounded-lg border p-5 transition-all ${
-                  result.tone === "success"
-                    ? "border-emerald-400/20 bg-emerald-500/10"
-                    : "border-rose-400/20 bg-rose-500/10"
+                className={`result-card rounded-lg p-5 transition-all ${
+                  result.tone === "success" ? "result-card-success" : "result-card-danger"
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -237,16 +224,16 @@ export default function UserPage({ session, onLogout }) {
 
                 {result.details?.TransactionID ? (
                   <div className="mt-4 grid gap-3 text-sm text-slate-100">
-                    <div className="rounded-lg border border-emerald-400/20 bg-white/6 p-3">
+                    <div className="notice-card">
                       <p className="text-xs uppercase tracking-[0.22em] text-emerald-200">Transaction ID</p>
                       <p className="mt-1 break-all">{result.details.TransactionID}</p>
                     </div>
                     <div className="grid gap-3 md:grid-cols-2">
-                      <div className="rounded-lg border border-white/10 bg-white/6 p-3">
+                      <div className="notice-card">
                         <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Region</p>
                         <p className="mt-1">{result.details.Region_Code}</p>
                       </div>
-                      <div className="rounded-lg border border-white/10 bg-white/6 p-3">
+                      <div className="notice-card">
                         <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Ledger Hash</p>
                         <p className="mt-1 break-all text-xs">{result.details.CurrentHash}</p>
                       </div>
@@ -276,7 +263,7 @@ export default function UserPage({ session, onLogout }) {
             )}
           </div>
 
-          <div className="mt-6 rounded-lg border border-white/10 bg-white/6 p-4 text-sm leading-6 text-slate-300">
+          <div className="notice-card muted-copy" style={{ marginTop: "1.5rem" }}>
             Use any citizen record from your uploaded Excel dataset. Scheme and amount must match the workbook exactly.
           </div>
         </section>

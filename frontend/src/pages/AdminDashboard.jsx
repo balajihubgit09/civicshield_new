@@ -92,40 +92,30 @@ export default function AdminDashboard({ credentials, onLogout }) {
   }
 
   return (
-    <div className="grid gap-5">
-      <section className="glass-card rounded-lg border border-white/14 p-6 sm:p-8">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+    <div className="content-grid">
+      <section className="glass-card hero-panel">
+        <div className="hero-grid">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">Administrative Control</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Secure operations dashboard</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
+            <p className="eyebrow">Administrative Control</p>
+            <h2 className="section-title">Secure operations dashboard</h2>
+            <p className="section-copy">
               Auto-refreshes every 5 seconds with live system state, fraud pressure, registry visibility, and ledger health.
             </p>
           </div>
 
-          <div className="grid gap-3 sm:min-w-[320px]">
-            <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Authenticated Admin</p>
-              <p className="mt-2 text-sm font-semibold text-white">{credentials?.username}</p>
+          <div className="hero-stat-grid">
+            <div className="glass-card hero-stat-card">
+              <span>Authenticated Admin</span>
+              <strong>{credentials?.username}</strong>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                onClick={() => loadDashboard()}
-                className="rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-              >
+            <div className="action-row" style={{ marginTop: 0 }}>
+              <button onClick={() => loadDashboard()} className="button-primary">
                 Refresh Dashboard
               </button>
-              <button
-                type="button"
-                onClick={onLogout}
-                className="rounded-lg border border-white/12 bg-white/8 px-4 py-3 text-sm font-medium text-slate-100 transition hover:bg-white/12"
-              >
+              <button type="button" onClick={onLogout} className="button-secondary">
                 Sign Out
               </button>
-              <Link
-                to="/admin/login"
-                className="rounded-lg border border-white/12 bg-white/8 px-4 py-3 text-center text-sm font-medium text-slate-100 transition hover:bg-white/12"
-              >
+              <Link to="/admin/login" className="button-secondary">
                 Back to Login
               </Link>
             </div>
@@ -133,11 +123,11 @@ export default function AdminDashboard({ credentials, onLogout }) {
         </div>
 
         {error ? (
-          <div className="mt-5 rounded-lg border border-rose-400/25 bg-rose-500/12 p-4 text-sm text-rose-100">{error}</div>
+          <div className="danger-panel rounded-lg p-4 text-sm text-rose-100" style={{ marginTop: "1.25rem" }}>{error}</div>
         ) : null}
 
         {freezeAlert ? (
-          <div className="mt-5 rounded-lg border border-rose-400/25 bg-rose-500/12 p-4 animate-pulseGlow">
+          <div className="danger-panel rounded-lg p-4 animate-pulseGlow" style={{ marginTop: "1.25rem" }}>
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-100">Freeze Alert</p>
@@ -170,35 +160,36 @@ export default function AdminDashboard({ credentials, onLogout }) {
               <FraudSummary fraudSummary={dashboard.fraudSummary} recentRequests={dashboard.recentRequests} />
             </div>
 
-            <div className="glass-card rounded-lg border border-white/14 p-5">
-              <p className="text-sm font-medium text-white">Admin actions</p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">Pause immediately, resume only from PAUSED, download tamper report only while frozen.</p>
+            <div className="glass-card info-panel">
+              <p className="eyebrow">Admin Actions</p>
+              <h3 className="section-title">Guarded control path</h3>
+              <p className="section-copy">Pause immediately, resume only from PAUSED, and download a tamper report only while frozen.</p>
 
               <div className="mt-5 grid gap-3">
                 <button
                   disabled={busy || dashboard.status !== "ACTIVE"}
                   onClick={() => handleAction("pause")}
-                  className="rounded-lg border border-amber-300/25 bg-amber-400/12 px-4 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-400/18 disabled:opacity-50"
+                  className="button-warning"
                 >
                   Emergency Pause
                 </button>
                 <button
                   disabled={busy || dashboard.status !== "PAUSED"}
                   onClick={() => handleAction("resume")}
-                  className="rounded-lg border border-emerald-300/25 bg-emerald-400/12 px-4 py-3 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/18 disabled:opacity-50"
+                  className="button-success"
                 >
                   Resume
                 </button>
                 <button
                   disabled={busy || dashboard.status !== "FROZEN"}
                   onClick={() => handleAction("report")}
-                  className="rounded-lg border border-cyan-300/25 bg-cyan-400/12 px-4 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-400/18 disabled:opacity-50"
+                  className="button-danger"
                 >
                   Download Tamper Report
                 </button>
               </div>
 
-              <div className="mt-5 rounded-lg border border-white/10 bg-white/6 p-4 text-sm leading-6 text-slate-300">
+              <div className="notice-card muted-copy" style={{ marginTop: "1.25rem" }}>
                 Admin credentials are kept in memory only for the current browser session.
               </div>
             </div>
