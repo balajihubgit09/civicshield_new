@@ -11,7 +11,7 @@ CivicShield is a Track 1 welfare disbursement validation platform built around a
 ## Stack
 
 - Frontend: React + Vite + Tailwind CSS
-- Backend: Node.js + Express
+- Backend: Python + Flask
 - Dataset Source: Excel `.xlsx`
 - Persistent runtime storage:
   - [ledger.json](/c:/Users/BALAJI/evlove/civicshield/backend/data/ledger.json)
@@ -67,6 +67,12 @@ From the project root:
 npm install
 ```
 
+For the Flask backend:
+
+```bash
+python -m pip install -r backend/requirements.txt
+```
+
 ### 2. Run the app
 
 From the project root:
@@ -81,7 +87,7 @@ Backend:
 
 ```bash
 cd backend
-npm run dev
+python run.py
 ```
 
 Frontend:
@@ -103,6 +109,13 @@ npm.cmd install
 npm.cmd run dev
 ```
 
+If `python` is not on PATH on Windows, use:
+
+```powershell
+py -3 -m pip install -r backend\requirements.txt
+py -3 backend\run.py
+```
+
 ## Environment
 
 Defaults are defined in [backend/.env.example](/c:/Users/BALAJI/evlove/civicshield/backend/.env.example):
@@ -116,6 +129,12 @@ INITIAL_BUDGET=1000000
 ```
 
 Create `backend/.env` if you want to override these values.
+
+## Backend Notes
+
+- The active backend entrypoint is [run.py](/c:/Users/BALAJI/evlove/civicshield/backend/run.py)
+- Flask application code lives in [flask_app](/c:/Users/BALAJI/evlove/civicshield/backend/flask_app)
+- Legacy Express source remains in [backend/src](/c:/Users/BALAJI/evlove/civicshield/backend/src), but project startup is configured for Flask
 
 ## Validation Pipeline
 
